@@ -1,0 +1,145 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteNav from "../components/SiteNav.astro";
+import CountdownTimer from "../components/CountdownTimer.jsx";
+import SectionVideo from "../components/SectionVideo.jsx";
+import CharacterSpotlight from "../components/CharacterSpotlight.jsx";
+import HeroUniverseRail from "../components/HeroUniverseRail.jsx";
+import RoadToGodsAndMonsters from "../components/RoadToGodsAndMonsters.jsx";
+import App from "../components/App.jsx";
+
+const HERO_PLAYLIST = ["/bg/dcuniverse.mp4"];
+---
+
+<Layout>
+  <SiteNav />
+
+  <section class="relative min-h-screen flex flex-col justify-end overflow-hidden border-b border-white/5">
+    <SectionVideo client:load playlist={HERO_PLAYLIST} overlay="soft" />
+
+    <!-- Top-left seal -->
+    <div class="absolute top-6 left-4 sm:left-8 z-10 flex items-center gap-3">
+      <img
+        src="/banner/dc-universe.jpg"
+        alt="DC"
+        class="w-16 h-16 sm:w-24 sm:h-24 lg:w-28 lg:h-28 object-contain drop-shadow-[0_4px_16px_rgba(0,0,0,0.65)]"
+      />
+    </div>
+
+    <HeroUniverseRail client:load />
+
+    <!-- Bottom-left title block, poster style -->
+    <div class="relative z-10 w-full px-4 sm:px-8 lg:px-14 pb-10 sm:pb-14 lg:pb-16 lg:pr-56">
+      <h1 class="font-display text-5xl sm:text-7xl lg:text-8xl tracking-tight leading-[0.88] drop-shadow-[0_4px_20px_rgba(0,0,0,0.75)]">
+        A Journey To <br /><span class="text-accent">TOMORROW</span>
+      </h1>
+
+      <p class="relative mt-4 sm:mt-5 text-muted max-w-lg text-sm sm:text-base drop-shadow-[0_1px_6px_rgba(0,0,0,0.6)]">
+        Five DC universes, one place to watch them in order — from the Dark Knight Trilogy to the DCU's next chapter.
+      </p>
+
+      <div class="relative mt-6 sm:mt-8 flex flex-col sm:flex-row sm:items-end gap-6 sm:gap-10">
+        <CountdownTimer client:load variant="inline" />
+
+        <div class="flex flex-col sm:flex-row items-stretch sm:items-center gap-3">
+          <a href="#timeline" class="inline-flex items-center justify-center text-xs font-bold uppercase tracking-wide px-5 py-3 rounded-full bg-accent text-white hover:bg-accent-bright transition-colors">
+            Start Watch Order
+          </a>
+          <a href="#chapters" class="inline-flex items-center justify-center text-xs font-bold uppercase tracking-wide px-5 py-3 rounded-full border border-white/20 text-white hover:border-white/40 transition-colors">
+            Jump to Chapter One
+          </a>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="relative max-w-6xl mx-auto px-4 sm:px-6 py-14">
+    <div class="flex items-center gap-4 mb-8">
+      <span class="h-px flex-1 bg-gradient-to-r from-transparent via-white/15 to-white/15" />
+      <h2 class="font-display text-lg tracking-[0.3em] text-muted uppercase whitespace-nowrap">
+        Character Spotlight
+      </h2>
+      <span class="h-px flex-1 bg-gradient-to-l from-transparent via-white/15 to-white/15" />
+    </div>
+    <div class="max-w-sm mx-auto">
+      <CharacterSpotlight client:load />
+    </div>
+  </section>
+
+  <section class="relative overflow-hidden">
+    <div class="starfield" aria-hidden="true">
+      <div class="stars stars-small"></div>
+      <div class="stars stars-medium"></div>
+      <div class="stars stars-large"></div>
+    </div>
+    <main class="relative z-10 pt-10">
+      <App client:load />
+    </main>
+  </section>
+
+  <RoadToGodsAndMonsters client:load />
+</Layout>
+
+<style>
+  .starfield {
+    position: absolute;
+    inset: 0;
+    z-index: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(120,170,255,0.05), transparent 60%);
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .stars {
+    position: absolute;
+    inset: -50%;
+    width: 200%;
+    height: 200%;
+    background-repeat: repeat;
+  }
+
+  /* Three star layers at different sizes/depths/speeds for a subtle parallax feel */
+  .stars-small {
+    background-image:
+      radial-gradient(1px 1px at 20px 30px, rgba(212,160,23,0.6), transparent),
+      radial-gradient(1px 1px at 90px 120px, rgba(120,170,255,0.5), transparent),
+      radial-gradient(1px 1px at 160px 60px, rgba(212,160,23,0.55), transparent),
+      radial-gradient(1px 1px at 230px 190px, rgba(120,170,255,0.4), transparent),
+      radial-gradient(1px 1px at 310px 90px, rgba(212,160,23,0.5), transparent);
+    background-size: 340px 220px;
+    animation: drift 120s linear infinite, twinkle 4s ease-in-out infinite alternate;
+  }
+
+  .stars-medium {
+    background-image:
+      radial-gradient(1.5px 1.5px at 60px 80px, rgba(120,170,255,0.7), transparent),
+      radial-gradient(1.5px 1.5px at 180px 40px, rgba(212,160,23,0.5), transparent),
+      radial-gradient(1.5px 1.5px at 280px 160px, rgba(120,170,255,0.6), transparent),
+      radial-gradient(1.5px 1.5px at 360px 220px, rgba(212,160,23,0.45), transparent);
+    background-size: 420px 260px;
+    animation: drift 90s linear infinite reverse, twinkle 5s ease-in-out infinite alternate-reverse;
+  }
+
+  .stars-large {
+    background-image:
+      radial-gradient(2px 2px at 100px 50px, rgba(59,130,246,0.55), transparent),
+      radial-gradient(2px 2px at 240px 140px, rgba(212,160,23,0.6), transparent),
+      radial-gradient(2px 2px at 340px 70px, rgba(120,170,255,0.5), transparent);
+    background-size: 500px 300px;
+    animation: drift 150s linear infinite, twinkle 6s ease-in-out infinite alternate;
+  }
+
+  @keyframes drift {
+    from { transform: translate(0, 0); }
+    to { transform: translate(-200px, -150px); }
+  }
+
+  @keyframes twinkle {
+    from { opacity: 0.4; }
+    to { opacity: 1; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    .stars { animation: none !important; }
+  }
+</style>

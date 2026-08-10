@@ -1,0 +1,60 @@
+---
+import Layout from "../../layouts/Layout.astro";
+import CharacterTimeline from "../../components/CharacterTimeline.jsx";
+import { CHARACTERS } from "../../data/characters.js";
+
+export function getStaticPaths() {
+  return CHARACTERS.map((character) => ({
+    params: { slug: character.slug },
+    props: { character },
+  }));
+}
+
+const { character } = Astro.props;
+const posterIsPlaceholder = character.poster?.includes("PLACEHOLDER");
+---
+
+<Layout title={`${character.name} — A Journey To  Tommorow`}>
+  <!-- Character hero banner -->
+  <section class="relative min-h-[50vh] flex items-end overflow-hidden border-b border-white/5">
+    <div class="absolute inset-0">
+      {posterIsPlaceholder ? (
+        <div class="media-placeholder absolute inset-0 flex flex-col items-center justify-center gap-2 text-muted">
+          <span class="text-xs uppercase tracking-widest">Banner image goes here</span>
+          <span class="text-[10px] text-muted/60 font-mono">{character.poster}</span>
+        </div>
+      ) : (
+        <img
+          src={character.poster}
+          alt={character.name}
+          class="absolute inset-0 w-full h-full object-cover"
+        />
+      )}
+      <div class="absolute inset-0 bg-gradient-to-t from-bg via-bg/70 to-black/40" />
+      <div class="absolute inset-0 bg-gradient-to-r from-black/60 via-transparent to-transparent" />
+    </div>
+
+    <div class="relative z-10 w-full max-w-6xl mx-auto px-4 sm:px-6 pb-12 pt-24">
+      <a
+        href="/"
+        class="inline-flex items-center gap-1.5 text-xs font-bold uppercase tracking-wide text-muted hover:text-white transition-colors mb-6"
+      >
+        ← Back to timeline
+      </a>
+      <span class="text-[11px] uppercase tracking-widest text-accent font-bold">
+        Character Spotlight
+      </span>
+      <h1 class="font-display text-5xl sm:text-7xl tracking-wide leading-none mt-2">
+        {character.name}
+      </h1>
+      <p class="text-muted mt-3 text-sm sm:text-base">
+        Played by {character.actor} · {character.tagline}
+      </p>
+    </div>
+  </section>
+
+  <!-- Character's movie playlist -->
+  <section class="relative pt-12">
+    <CharacterTimeline client:load movieIds={character.movieIds} />
+  </section>
+</Layout>

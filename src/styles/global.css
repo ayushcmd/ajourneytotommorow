@@ -1,0 +1,58 @@
+@import "tailwindcss";
+
+@theme {
+  --color-bg: #05070f;
+  --color-panel: #0d1220;
+  --color-text: #eef1f8;
+  --color-muted: #9aa5bd;
+  --color-accent: #d4a017;
+  --color-accent-bright: #f4c430;
+  --color-steel: #1d4ed8;
+  --color-steel-bright: #3b82f6;
+  --font-display: "Bebas Neue", "Roboto Condensed", system-ui, sans-serif;
+  --font-body: "Roboto", system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, monospace;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  -webkit-font-smoothing: antialiased;
+}
+
+/* Placeholder pattern for media the user hasn't uploaded yet */
+.media-placeholder {
+  background-image: repeating-linear-gradient(
+    45deg,
+    rgba(212, 160, 23, 0.08),
+    rgba(212, 160, 23, 0.08) 10px,
+    transparent 10px,
+    transparent 20px
+  );
+  background-color: #0b0e19;
+}
+
+/* Phase tabs horizontal scroll — hide scrollbar */
+.no-scrollbar::-webkit-scrollbar {
+  display: none;
+}
+.no-scrollbar {
+  -ms-overflow-style: none;
+  scrollbar-width: none;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}

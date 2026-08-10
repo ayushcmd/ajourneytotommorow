@@ -1,0 +1,42 @@
+---
+import Layout from "../layouts/Layout.astro";
+import SiteNav from "../components/SiteNav.astro";
+
+const year = new Date().getFullYear();
+---
+
+<Layout title="Privacy Policy — A Journey To  Tommorow">
+  <SiteNav />
+
+  <main class="max-w-3xl mx-auto px-4 sm:px-6 py-16 sm:py-24">
+    <h1 class="font-display text-4xl sm:text-5xl tracking-wide mb-8">
+      Privacy <span class="text-accent">Policy</span>
+    </h1>
+
+    <div class="flex flex-col gap-6 text-sm sm:text-base text-muted leading-relaxed">
+      <p>
+        A Journey To  Tommorow is an unofficial fan project for tracking DC Universe
+        (DCU) movies and series. It is not affiliated with, endorsed by, or
+        connected to DC Studios, Warner Bros., or Warner Bros. Discovery.
+      </p>
+      <p>
+        <span class="text-white font-semibold">What we store:</span> your
+        "watched" checkmarks, view preference (timeline/grid), and sort
+        preference are saved only in your browser's local storage. This data
+        never leaves your device and is not sent to any server we control.
+      </p>
+      <p>
+        <span class="text-white font-semibold">What we don't do:</span> we
+        don't use tracking cookies, sell data, or require an account.
+      </p>
+      <p>
+        <span class="text-white font-semibold">Third-party links:</span> any
+        external links (e.g. streaming or purchase links) take you to
+        third-party sites with their own privacy policies.
+      </p>
+      <p class="text-xs text-muted/60 pt-4 border-t border-white/10">
+        Last updated {year}.
+      </p>
+    </div>
+  </main>
+</Layout>
